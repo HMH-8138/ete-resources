@@ -1,0 +1,102 @@
+{
+  "users": [
+    {
+      "id": "2208006",
+      "name": "Meherab Hossen",
+      "email": "meherab@test.com",
+      "phone": "",
+      "batch": "2022",
+      "address": "",
+      "password": "test123",
+      "role": "student",
+      "createdAt": "2026-03-29T13:53:06.365Z"
+    }
+  ],
+  "resources": [
+    {
+      "userId": "2208006",
+      "userName": "Meherab Hossen",
+      "batch": "2022",
+      "level": "3",
+      "term": "1",
+      "courseCode": "ETE 301",
+      "courseName": "Semiconductor Physics & Devices",
+      "resourceType": "books",
+      "fileTitle": "Chapter 1 - Introduction",
+      "description": "Introduction to semiconductor physics",
+      "fileData": {
+        "filename": "file-1772059922351-323079017.pdf",
+        "originalName": "chapter1.pdf",
+        "size": 1024000,
+        "mimetype": "application/pdf"
+      },
+      "status": "approved",
+      "uploadedAt": "2024-11-25",
+      "id": 1
+    },
+    {
+      "userId": "2208006",
+      "userName": "Meherab Hossen",
+      "batch": "2022",
+      "level": "3",
+      "term": "1",
+      "courseCode": "ETE 303",
+      "courseName": "Industrial Electronics",
+      "resourceType": "notes",
+      "fileTitle": "Lecture Notes - Chapter 1",
+      "description": "Power electronics fundamentals",
+      "fileData": {
+        "filename": "file-1772060429745-903487855.pdf",
+        "originalName": "lecture1.pdf",
+        "size": 2048000,
+        "mimetype": "application/pdf"
+      },
+      "status": "approved",
+      "uploadedAt": "2024-11-25",
+      "id": 2
+    },
+    {
+      "userId": "2208006",
+      "userName": "Meherab Hossen",
+      "batch": "2022",
+      "level": "3",
+      "term": "1",
+      "courseCode": "ETE 305",
+      "courseName": "Digital Communication",
+      "resourceType": "questions",
+      "fileTitle": "Previous Year Questions",
+      "description": "Midterm questions from 2023",
+      "fileData": {
+        "filename": "file-1772096550302-180389119.pdf",
+        "originalName": "questions.pdf",
+        "size": 512000,
+        "mimetype": "application/pdf"
+      },
+      "status": "approved",
+      "uploadedAt": "2024-11-26",
+      "id": 3
+    },
+    {
+      "userId": "2208006",
+      "userName": "Meherab Hossen",
+      "batch": "2022",
+      "level": "3",
+      "term": "1",
+      "courseCode": "ETE 301",
+      "courseName": "ETE 301",
+      "resourceType": "notes",
+      "fileTitle": "test",
+      "description": "",
+      "fileData": {
+        "filename": "file-1774795457657-85316411.pdf",
+        "originalName": "Lecture_2.pdf",
+        "size": 1662309,
+        "mimetype": "application/pdf",
+        "path": "e:\\Folder\\CODE\\ETE_resourse_sharing_website-meherab\\my-backend\\uploads\\file-1774795457657-85316411.pdf"
+      },
+      "uploadedAt": "2026-03-29T14:44:17.688Z",
+      "status": "pending",
+      "id": 4
+    }
+  ]
+}

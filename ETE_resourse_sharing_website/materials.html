@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials - ETE Resource Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ====== CLEAN LAYOUT (keeping original theme colors) ====== */
+        
+        .sidebar {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 10px;
+        }
+
+        .sidebar p {
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        .sidebar ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li:hover {
+            color: var(--secondary-blue);
+            padding-left: 5px;
+        }
+
+        /* ====== COURSE CARDS ====== */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .item-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid var(--primary-blue);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .item-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .item-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .item-card p {
+            color: var(--text-dark);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .item-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .item-link:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* ====== OPTIONS CARDS ====== */
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .option-card {
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.1), rgba(0, 212, 255, 0.1));
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option-card:hover {
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.2), rgba(0, 212, 255, 0.2));
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+
+        .option-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .option-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .option-card p {
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        /* ====== CONTENT HEADER ====== */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .content-header span {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* ====== BREADCRUMB ====== */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .breadcrumb span {
+            color: #999;
+        }
+
+        /* ====== BUTTONS ====== */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ====== BADGES ====== */
+        .pdf-count {
+            display: inline-block;
+            background: #27ae60;
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        /* ====== EMPTY STATE ====== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+                gap: 15px;
+            }
+            
+            .options-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item portal-nav"><a href="student_login.html" class="nav-link">Student Portal</a></li>
+                <li class="nav-item portal-nav"><a href="admin_login.html" class="nav-link">Admin Portal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="overlay">
+            <p class="dept-sub">Faculty of Electrical & Computer Engineering</p>
+            <h1 id="pageTitle">Materials</h1>
+            <p class="tagline" id="pageSubtitle">Department of Electronics and Telecommunication Engineering</p>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div class="layout">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <h3>About ETE Portal</h3>
+            <p>
+                The ETE Resource Portal is a centralized platform designed to help students 
+                access academic notes, resources, and shared materials.
+            </p>
+
+            <h3>Student Information</h3>
+            <ul>
+                <li>Syllabus & Curriculum</li>
+                <li>Class Routine</li>
+                <li>Exam Schedule</li>
+                <li>Result Archive</li>
+            </ul>
+
+            <h3>Teachers' Profiles</h3>
+            <ul>
+                <li>Prof.Dr.Md.Jahedul Islam</li>
+                <li>Dr.Mohammad Azad Hossain</li>
+                <li>Dr.Md.Saiful Islam</li>
+                <li>View All Faculty</li>
+            </ul>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span id="breadcrumbText">Materials</span>
+            </div>
+
+            <div class="materials-header">
+                <h2 id="materialsTitle">Courses</h2>
+                <button onclick="goBack()" class="back-btn">← Back</button>
+            </div>
+
+            <div id="materialsGrid" class="items-grid">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+
+            <!-- Material Type Selection -->
+            <div id="typeSelectionArea" style="display: none;">
+                <div class="content-header">
+                    <span id="selectedMaterial"></span>
+                    <button onclick="goBackToMaterials()" class="close-btn">✕</button>
+                </div>
+
+                <div class="options-container">
+                    <div class="option-card" onclick="showMaterialType('books')">
+                        <div class="option-icon">📖</div>
+                        <h3>Books</h3>
+                        <p>Reference books and textbooks</p>
+                    </div>
+                    <div class="option-card" onclick="showMaterialType('questions')">
+                        <div class="option-icon">❓</div>
+                        <h3>Question Papers</h3>
+                        <p>Past exam papers and questions</p>
+                    </div>
+                    <div class="option-card" onclick="showMaterialType('notes')">
+                        <div class="option-icon">📝</div>
+                        <h3>Class Notes</h3>
+                        <p>Lecture notes and handouts</p>
+                    </div>
+                    <div class="option-card" onclick="showMaterialType('resources')">
+                        <div class="option-icon">🔗</div>
+                        <h3>Resources</h3>
+                        <p>Tutorials and reference materials</p>
+                    </div>
+                </div>
+
+                <div id="finalMaterialsGrid" class="items-grid">
+                    <!-- Final materials will be shown here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 ETE Department. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Backend API URL
+        const API_URL = 'http://localhost:3000/api';
+
+        // Course and Lab data
+        const coursesDataByLevel = {};
+        const defaultCourses = [];
+        const defaultLabs = [];
+        const materialTypesData = { books: [], questions: [], notes: [], resources: [] };
+
+        // Get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                type: params.get('type') || 'courses',
+                level: params.get('level') || '1',
+                term: params.get('term') || '1'
+            };
+        }
+
+        // Initialize page
+        async function initPage() {
+            const params = getUrlParams();
+            const isLabs = params.type === 'labs';
+            
+            try {
+                const response = await fetch(`${API_URL}/materials/${params.type}/${params.level}/${params.term}`);
+                const result = await response.json();
+                let data = result.data || [];
+                
+                const typeLabel = isLabs ? 'Lab' : 'Courses';
+                document.getElementById('pageTitle').textContent = typeLabel;
+                document.getElementById('materialsTitle').textContent = typeLabel;
+                document.getElementById('pageSubtitle').textContent = `Level ${params.level} - Term ${params.term}`;
+                document.getElementById('breadcrumbText').textContent = `Level ${params.level} - Term ${params.term} - ${typeLabel}`;
+
+                const grid = document.getElementById('materialsGrid');
+                grid.innerHTML = '';
+                
+                if (data.length === 0) {
+                    grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; padding:20px;">No materials available.</p>';
+                    return;
+                }
+                
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `<h4>${item.name}</h4><p class="course-subtitle">${item.title}</p>`;
+                    card.onclick = () => selectMaterial(item.name, item.title, item);
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading materials:', error);
+                const levelTermKey = `${params.level}-${params.term}`;
+                let courseData = defaultCourses;
+                let labData = defaultLabs;
+                if (coursesDataByLevel[levelTermKey]) { courseData = coursesDataByLevel[levelTermKey].courses; labData = coursesDataByLevel[levelTermKey].labs; }
+                const data = isLabs ? labData : courseData;
+                const typeLabel = isLabs ? 'Lab' : 'Courses';
+                document.getElementById('pageTitle').textContent = typeLabel;
+                document.getElementById('materialsTitle').textContent = typeLabel;
+                document.getElementById('pageSubtitle').textContent = `Level ${params.level} - Term ${params.term}`;
+                document.getElementById('breadcrumbText').textContent = `Level ${params.level} - Term ${params.term} - ${typeLabel}`;
+                const grid = document.getElementById('materialsGrid');
+                grid.innerHTML = '';
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'item-card';
+                    card.innerHTML = `<h4>${item.name}</h4><p class="course-subtitle">${item.title}</p>`;
+                    card.onclick = () => selectMaterial(item.name, item.title, item);
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        function selectMaterial(name, title) {
+            document.getElementById('materialsGrid').style.display = 'none';
+            document.getElementById('typeSelectionArea').style.display = 'block';
+            document.getElementById('selectedMaterial').textContent = `${name} - ${title}`;
+            document.getElementById('finalMaterialsGrid').innerHTML = '';
+            window.currentMaterialName = name;
+            window.currentMaterialTitle = title;
+        }
+
+        async function showMaterialType(type) {
+            const params = getUrlParams();
+            const courseName = window.currentMaterialName;
+            
+            try {
+                const response = await fetch(`${API_URL}/materials/${params.type}/${params.level}/${params.term}/${courseName}/${type}`);
+                const result = await response.json();
+                const materials = result.data || [];
+                displayMaterials(type, materials);
+            } catch (error) {
+                console.error('Error loading materials:', error);
+                const materials = materialTypesData[type] || [];
+                displayMaterials(type, materials);
+            }
+        }
+        
+        function displayMaterials(type, materials) {
+            const grid = document.getElementById('finalMaterialsGrid');
+            grid.innerHTML = '';
+            
+            const typeLabels = {
+                books: 'Books',
+                questions: 'Question Papers',
+                notes: 'Class Notes',
+                resources: 'Resources'
+            };
+
+            // Hide options and show materials
+            document.querySelector('.options-container').style.display = 'none';
+
+            // Add type header
+            const header = document.createElement('h3');
+            header.style.gridColumn = '1 / -1';
+            header.textContent = typeLabels[type];
+            header.style.color = 'var(--primary-blue)';
+            header.style.marginBottom = '20px';
+            header.style.fontSize = '24px';
+            header.style.borderBottom = '2px solid var(--light-gray)';
+            header.style.paddingBottom = '15px';
+            
+            grid.appendChild(header);
+
+            if (materials.length === 0) {
+                grid.innerHTML += '<div class="empty-state" style="grid-column:1/-1;"><h3>No materials found</h3><p>Be the first to upload!</p></div>';
+            }
+
+            materials.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                
+                // Get filename - check both item.filename and item.file.filename
+                const filename = item.filename || (item.file && item.file.filename);
+                
+                let viewLink = '';
+                if (item.isUserUpload && filename) {
+                    viewLink = '<a href="http://localhost:3000/uploads/' + filename + '" target="_blank" class="item-link">View PDF</a>';
+                } else if (item.isUserUpload) {
+                    viewLink = '<span class="item-link" style="color:#999;">No file</span>';
+                } else {
+                    viewLink = '<span class="item-link" style="color:#999;">Not available</span>';
+                }
+                
+                let uploadBadge = '';
+                if (item.isUserUpload) {
+                    uploadBadge = '<span class="pdf-count">User Upload</span>';
+                }
+                
+                card.innerHTML = '<h4>' + item.name + '</h4><p>' + item.title + '</p>' + uploadBadge + viewLink;
+                grid.appendChild(card);
+            });
+
+            // Add back button
+            const backBtnContainer = document.createElement('div');
+            backBtnContainer.style.gridColumn = '1 / -1';
+            backBtnContainer.style.marginTop = '20px';
+            backBtnContainer.innerHTML = '<button class="back-btn" onclick="goBackToMaterials()">Back to Courses</button>';
+            grid.appendChild(backBtnContainer);
+        }
+
+        function downloadMaterial(name, title) {
+            alert('Download: ' + name + ' - ' + title);
+        }
+
+        function goBackToMaterials() {
+            document.getElementById('typeSelectionArea').style.display = 'none';
+            document.getElementById('materialsGrid').style.display = 'grid';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', initPage);
+    </script>
+</body>
+</html>
