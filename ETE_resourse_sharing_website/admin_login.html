@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label for="adminId">Admin ID *</label>
-                    <input type="text" id="adminId" placeholder="meherab" required>
+                    <input type="text" id="adminId" placeholder="Enter your admin ID" required>
                 </div>
 
                 <div class="form-group">
@@ -55,29 +55,23 @@
                 return;
             }
 
-            try {
-                const response = await fetch(`${API_URL}/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id, password })
-                });
+            // Check for authorized admin credentials
+            const validAdmins = [
+                { id: '2208006', password: 'meherab123', name: 'Meherab' },
+                { id: '2208051', password: 'hisham123', name: 'Hisham' }
+            ];
 
-                const data = await response.json();
+            const admin = validAdmins.find(admin => admin.id === id && admin.password === password);
 
-                if (data.success && data.user.role === 'admin') {
-                    localStorage.setItem('userLoggedIn', 'true');
-                    localStorage.setItem('userName', data.user.name);
-                    localStorage.setItem('userId', data.user.id);
-                    localStorage.setItem('userRole', 'admin');
-                    alert('Admin login successful!');
-                    window.location.href = 'admin_new.html';
-                } else {
-                    alert('Invalid admin credentials');
-                }
-            } catch (error) {
-                alert('Server error. Backend on port 3000?');
+            if (admin) {
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('userName', admin.name);
+                localStorage.setItem('userId', admin.id);
+                localStorage.setItem('userRole', 'admin');
+                alert('Admin login successful!');
+                window.location.href = 'admin_new.html';
+            } else {
+                alert('Invalid admin credentials. Only authorized admins can access this portal.');
             }
         }
     </script>
