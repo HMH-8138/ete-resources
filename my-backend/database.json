@@ -154,8 +154,36 @@
         "path": "e:\\Folder\\CODE\\WEBSITE\\my-backend\\uploads\\file-1774796670725-628915009.pdf"
       },
       "uploadedAt": "2026-03-29T15:04:30.736Z",
-      "status": "pending",
-      "id": 6
+      "status": "approved",
+      "id": 6,
+      "reviewComment": "",
+      "reviewedAt": "2026-04-01T04:28:18.713Z",
+      "adminId": "admin"
+    },
+    {
+      "userId": "2208006",
+      "userName": "Meherab Hossen",
+      "batch": "2022",
+      "level": "3",
+      "term": "2",
+      "courseCode": "ETE 313",
+      "courseName": "ETE 313",
+      "resourceType": "books",
+      "fileTitle": "yfujyf",
+      "description": "",
+      "fileData": {
+        "filename": "file-1775017631647-916387839.pdf",
+        "originalName": "Lecture_7.pdf",
+        "size": 696535,
+        "mimetype": "application/pdf",
+        "path": "e:\\Folder\\CODE\\WEBSITE\\my-backend\\uploads\\file-1775017631647-916387839.pdf"
+      },
+      "uploadedAt": "2026-04-01T04:27:11.661Z",
+      "status": "rejected",
+      "id": 7,
+      "reviewComment": "wrong file name",
+      "reviewedAt": "2026-04-01T04:28:32.228Z",
+      "adminId": "admin"
     }
   ]
 }
