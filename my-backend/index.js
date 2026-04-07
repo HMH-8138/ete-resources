@@ -103,6 +103,11 @@ function parseResources(resources) {
 
 // ============ API ROUTES ============
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Server is running' });
+});
+
 // POST /api/register
 app.post('/api/register', (req, res) => {
     const { name, email, id, phone, batch, address, password } = req.body;
