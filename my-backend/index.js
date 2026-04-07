@@ -30,10 +30,13 @@ const storage = multer.diskStorage({
 
 // File filter to allow only PDF and PPTX
 const fileFilter = (req, file, cb) => {
-    const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
-    if (allowedTypes.includes(file.mimetype) || 
-        file.originalname.endsWith('.pdf') || 
-        file.originalname.endsWith('.pptx')) {
+    const allowedTypes = [
+        'application/pdf',
+        'application/x-pdf',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+    ];
+    const ext = path.extname(file.originalname || '').toLowerCase();
+    if (allowedTypes.includes(file.mimetype) || ext === '.pdf' || ext === '.pptx') {
         cb(null, true);
     } else {
         cb(new Error('Invalid file type. Only PDF and PPTX are allowed.'), false);
@@ -42,7 +45,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ 
     storage: storage,
-    limits: { fileSize: 50 * 1024 * 1024 }, // 50 MB limit
+    limits: { fileSize: 100 * 1024 * 1024 }, // 100 MB limit
     fileFilter: fileFilter
 });
 
@@ -371,6 +374,22 @@ app.get('/api/health', (req, res) => {
         usersCount: users.length, 
         resourcesCount: resources.length 
     });
+});
+
+// Upload error handler (multer/file type) so frontend receives JSON
+app.use((err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ success: false, message: 'File too large. Maximum size is 100 MB.' });
+        }
+        return res.status(400).json({ success: false, message: err.message || 'Upload failed' });
+    }
+
+    if (err && err.message && err.message.includes('Invalid file type')) {
+        return res.status(400).json({ success: false, message: err.message });
+    }
+
+    return next(err);
 });
 
 // Catch-all route for SPA - serve index.html for any unknown routes
