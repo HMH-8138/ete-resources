@@ -381,7 +381,7 @@
 
     <script>
         // Backend API URL
-        const API_URL = 'http://localhost:3000/api';
+        const API_URL = 'https://ete-resources.onrender.com/api';
         
         // Current tab
         let currentTab = 'pending';
@@ -502,7 +502,7 @@
                 
                 // View PDF button - shows if file exists (for admin to review)
 const viewButton = (resource.file && resource.file.filename) 
-                    ? `<a href="http://localhost:3000/uploads/${resource.file.filename}" target="_blank" class="btn-view">View PDF</a>` 
+                    ? `<a href="https://ete-resources.onrender.com/uploads/${resource.file.filename}" target="_blank" class="btn-view">View PDF</a>` 
                     : '';
                 
                 // Delete button - only for admin

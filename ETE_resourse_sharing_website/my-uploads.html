@@ -322,7 +322,7 @@
 
     <script>
         // Backend API URL
-        const API_URL = 'http://localhost:3000/api';
+        const API_URL = 'https://ete-resources.onrender.com/api';
         
         let myUploads = [];
         
@@ -468,7 +468,7 @@
                         </div>
                         ${upload.description ? `<p style="margin-top: 10px; color: #666;">${upload.description}</p>` : ''}
 ${reviewFeedback}
-${upload.file && upload.file.filename ? `<a href="http://localhost:3000/uploads/${upload.file.filename}" target="_blank" class="btn-upload" style="margin-top:10px;">📄 View PDF</a>` : ''}
+${upload.file && upload.file.filename ? `<a href="https://ete-resources.onrender.com/uploads/${upload.file.filename}" target="_blank" class="btn-upload" style="margin-top:10px;">📄 View PDF</a>` : ''}
                     </div>
                 `;
             }).join('');

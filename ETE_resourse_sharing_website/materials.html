@@ -347,7 +347,7 @@
 
     <script>
         // Backend API URL
-        const API_URL = 'http://localhost:3000/api';
+        const API_URL = 'https://ete-resources.onrender.com/api';
 
         // Course and Lab data
         const coursesDataByLevel = {};
@@ -484,7 +484,7 @@
                 
                 let viewLink = '';
                 if (item.isUserUpload && filename) {
-                    viewLink = '<a href="http://localhost:3000/uploads/' + filename + '" target="_blank" class="item-link">View PDF</a>';
+                    viewLink = '<a href="https://ete-resources.onrender.com/uploads/' + filename + '" target="_blank" class="item-link">View PDF</a>';
                 } else if (item.isUserUpload) {
                     viewLink = '<span class="item-link" style="color:#999;">No file</span>';
                 } else {
