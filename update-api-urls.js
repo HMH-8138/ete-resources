@@ -3,7 +3,10 @@
 /**
  * Script to update API URLs in all HTML files
  * Usage: node update-api-urls.js <new_api_url>
- * Example: node update-api-urls.js https://ete-resource-backend.onrender.com
+ * Examples:
+ *   node update-api-urls.js https://myusername.pythonanywhere.com
+ *   node update-api-urls.js https://ete-resource-backend.onrender.com
+ *   node update-api-urls.js http://localhost:3000
  */
 
 const fs = require('fs');
@@ -14,7 +17,10 @@ const apiUrl = process.argv[2];
 if (!apiUrl) {
     console.error('❌ Error: Please provide the new API URL');
     console.error('Usage: node update-api-urls.js <new_api_url>');
-    console.error('Example: node update-api-urls.js https://ete-resource-backend.onrender.com');
+    console.error('\nExamples:');
+    console.error('  node update-api-urls.js https://myusername.pythonanywhere.com');
+    console.error('  node update-api-urls.js https://ete-resource-backend.onrender.com');
+    console.error('  node update-api-urls.js http://localhost:3000');
     process.exit(1);
 }
 
@@ -51,16 +57,16 @@ htmlFiles.forEach(file => {
     let content = fs.readFileSync(filePath, 'utf8');
     let fileUpdates = 0;
 
-    // Replace API URL
-    const apiUrlRegex = /const API_URL = ['"]http:\/\/localhost:3000\/api['"]/g;
+    // Replace API URL - matches both localhost and remote URLs
+    const apiUrlRegex = /const API_URL = ['"]https?:\/\/[^'"]+\/api['"]/g;
     const apiMatches = content.match(apiUrlRegex);
     if (apiMatches) {
         content = content.replace(apiUrlRegex, `const API_URL = '${apiRoute}'`);
         fileUpdates += apiMatches.length;
     }
 
-    // Replace upload URLs
-    const uploadUrlRegex = /http:\/\/localhost:3000\/uploads\//g;
+    // Replace upload URLs in links - matches both localhost and remote URLs
+    const uploadUrlRegex = /https?:\/\/[^/]+\/uploads\//g;
     const uploadMatches = content.match(uploadUrlRegex);
     if (uploadMatches) {
         content = content.replace(uploadUrlRegex, `${uploadRoute}/`);

@@ -1,20 +1,12 @@
 {
-  "name": "my-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "ete-resource-backend",
+  "version": "2.0.0",
+  "description": "ETE Resource Portal Backend - Django/Python Version",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "note": "This project has been migrated from Node.js to Django/Python for PythonAnywhere compatibility"
   },
-  "keywords": [],
+  "keywords": ["ete", "resources", "django", "python"],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "better-sqlite3": "^11.7.0",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "multer": "^1.4.5-lts.1"
-  }
+  "note": "Use requirements.txt for Python dependencies instead"
 }
