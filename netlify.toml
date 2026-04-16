@@ -1,9 +1,0 @@
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Proxy API to local backend (for development)
-# from = "/api/*"
-# to = "http://localhost:3000/api/:splat"
-# status = 307
