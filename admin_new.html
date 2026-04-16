@@ -543,19 +543,19 @@ const viewButton = (resource.file && resource.file.filename)
                         <div class="resource-details">
                             <div class="detail-item">
                                 <span class="detail-label">Course</span>
-                                <span class="detail-value">${resource.courseCode}</span>
+                                <span class="detail-value">${resource.courseCode || 'N/A'}</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Level/Term</span>
-                                <span class="detail-value">Level ${resource.level} - Term ${resource.term}</span>
+                                <span class="detail-value">Level ${resource.level || 'N/A'} - Term ${resource.term || 'N/A'}</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Resource Type</span>
-                                <span class="detail-value">${resourceTypeLabels[resource.resourceType] || resource.resourceType}</span>
+                                <span class="detail-value">${resourceTypeLabels[resource.resourceType] || resource.resourceType || 'N/A'}</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Uploaded By</span>
-                                <span class="detail-value">${resource.userName}</span>
+                                <span class="detail-value">${resource.userName || 'N/A'}</span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Batch</span>
@@ -563,7 +563,7 @@ const viewButton = (resource.file && resource.file.filename)
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Upload Date</span>
-                                <span class="detail-value">${uploadedDate}</span>
+                                <span class="detail-value">${uploadedDate || 'Invalid Date'}</span>
                             </div>
                         </div>
                         ${resource.description ? `<div class="resource-description"><strong>Description:</strong> ${resource.description}</div>` : ''}
