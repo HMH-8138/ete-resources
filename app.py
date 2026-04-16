@@ -228,6 +228,173 @@ def delete_resource(resource_id):
     
     return jsonify({'success': True, 'message': 'Resource deleted successfully'})
 
+# Course and Lab data structure
+COURSES_DATA = {
+    '1-1': {
+        'courses': [
+            {'name': 'EEE 181', 'title': 'Electric Circuit Theory'},
+            {'name': 'MATH 181', 'title': 'Calculus I'},
+            {'name': 'MATH 183', 'title': 'Linear Algebra'},
+            {'name': 'CHEM 181', 'title': 'Chemistry I'},
+            {'name': 'HUM 181', 'title': 'English I'}
+        ],
+        'labs': [
+            {'name': 'EEE 182', 'title': 'Circuit Theory Lab'},
+            {'name': 'CHEM 182', 'title': 'Chemistry Lab'},
+            {'name': 'ME 182', 'title': 'Mechanical Workshop'}
+        ]
+    },
+    '1-2': {
+        'courses': [
+            {'name': 'ETE 101', 'title': 'Introduction to ETE'},
+            {'name': 'EEE 183', 'title': 'Electromagnetic Theory'},
+            {'name': 'PHY 181', 'title': 'Physics I'},
+            {'name': 'MATH 185', 'title': 'Calculus II'},
+            {'name': 'CSE 181', 'title': 'Programming Fundamentals'}
+        ],
+        'labs': [
+            {'name': 'ETE 102', 'title': 'ETE Lab I'},
+            {'name': 'EEE 184', 'title': 'Electromagnetic Lab'},
+            {'name': 'PHY 182', 'title': 'Physics Lab'},
+            {'name': 'CSE 182', 'title': 'Programming Lab'}
+        ]
+    },
+    '2-1': {
+        'courses': [
+            {'name': 'ETE 201', 'title': 'Digital Logic'},
+            {'name': 'ETE 203', 'title': 'Signals and Systems'},
+            {'name': 'CSE 281', 'title': 'Data Structures'},
+            {'name': 'MATH 281', 'title': 'Discrete Mathematics'},
+            {'name': 'HUM 281', 'title': 'Technical Writing'}
+        ],
+        'labs': [
+            {'name': 'ETE 202', 'title': 'Digital Logic Lab'},
+            {'name': 'ETE 204', 'title': 'DSP Lab'},
+            {'name': 'CSE 282', 'title': 'Data Structures Lab'}
+        ]
+    },
+    '2-2': {
+        'courses': [
+            {'name': 'ETE 205', 'title': 'Microprocessors'},
+            {'name': 'ETE 207', 'title': 'Analog Communications'},
+            {'name': 'ETE 209', 'title': 'Network Analysis'},
+            {'name': 'ETE 211', 'title': 'Electromagnetic Waves'},
+            {'name': 'HUM 283', 'title': 'Professional Ethics'}
+        ],
+        'labs': [
+            {'name': 'ETE 206', 'title': 'Microprocessor Lab'},
+            {'name': 'ETE 210', 'title': 'Communications Lab'},
+            {'name': 'ETE 212', 'title': 'Network Lab'},
+            {'name': 'CSE 284', 'title': 'Database Lab'}
+        ]
+    },
+    '3-1': {
+        'courses': [
+            {'name': 'ETE 301', 'title': 'Digital Signal Processing'},
+            {'name': 'ETE 303', 'title': 'Control Systems'},
+            {'name': 'ETE 305', 'title': 'Power Electronics'},
+            {'name': 'ETE 307', 'title': 'Microwave Engineering'},
+            {'name': 'ETE 309', 'title': 'Antenna Design'}
+        ],
+        'labs': [
+            {'name': 'ETE 304', 'title': 'DSP Lab'},
+            {'name': 'ETE 306', 'title': 'Control Lab'},
+            {'name': 'ETE 308', 'title': 'Power Electronics Lab'},
+            {'name': 'ETE 310', 'title': 'RF Lab'},
+            {'name': 'CSE 380', 'title': 'Web Development Lab'}
+        ]
+    },
+    '3-2': {
+        'courses': [
+            {'name': 'ETE 311', 'title': 'VLSI Design'},
+            {'name': 'ETE 313', 'title': 'Wireless Communications'},
+            {'name': 'ETE 315', 'title': 'Optical Communications'},
+            {'name': 'ETE 317', 'title': 'Internet of Things'},
+            {'name': 'ETE 319', 'title': 'Advanced Microprocessors'}
+        ],
+        'labs': [
+            {'name': 'ETE 300', 'title': 'VLSI Lab'},
+            {'name': 'ETE 314', 'title': 'Wireless Lab'},
+            {'name': 'ETE 316', 'title': 'Optical Lab'},
+            {'name': 'ETE 318', 'title': 'IoT Lab'},
+            {'name': 'CSE 320', 'title': 'Mobile App Lab'}
+        ]
+    },
+    '4-1': {
+        'courses': [
+            {'name': 'ETE 401', 'title': 'Advanced DSP'},
+            {'name': 'ETE 403', 'title': '5G Technology'},
+            {'name': 'ETE 405', 'title': 'Satellite Communications'},
+            {'name': 'ETE 407', 'title': 'Biomedical Engineering'},
+            {'name': 'ETE*', 'title': 'Elective Course'}
+        ],
+        'labs': [
+            {'name': 'ETE 400', 'title': 'Project Lab I'},
+            {'name': 'ETE 402', 'title': '5G Lab'},
+            {'name': 'ETE 404', 'title': 'Satellite Lab'},
+            {'name': 'ETE 406', 'title': 'Biomedical Lab'},
+            {'name': 'ETE 408', 'title': 'Thesis Lab'}
+        ]
+    },
+    '4-2': {
+        'courses': [
+            {'name': 'ETE 411', 'title': 'Machine Learning in Telecom'},
+            {'name': 'ETE 413', 'title': 'Network Security'},
+            {'name': 'ETE 415', 'title': 'Software Defined Networks'},
+            {'name': 'ETE 417', 'title': 'Quantum Communications'},
+            {'name': 'ETE*', 'title': 'Elective Course'}
+        ],
+        'labs': [
+            {'name': 'ETE 400', 'title': 'Project Lab II'},
+            {'name': 'ETE 412', 'title': 'ML Lab'},
+            {'name': 'ETE 414', 'title': 'Cybersecurity Lab'},
+            {'name': 'ETE 416', 'title': 'SDN Lab'},
+            {'name': 'ETE*', 'title': 'Thesis Lab'}
+        ]
+    }
+}
+
+@app.route('/api/materials/<material_type>/<level>/<term>', methods=['GET'])
+def get_materials_list(material_type, level, term):
+    """Get list of courses or labs for a given level and term"""
+    key = f"{level}-{term}"
+    
+    if key not in COURSES_DATA:
+        return jsonify({'success': False, 'message': 'Invalid level or term'}), 400
+    
+    data = COURSES_DATA[key]
+    items = data.get(material_type + 's' if material_type == 'lab' else material_type, [])
+    
+    return jsonify({'success': True, 'data': items})
+
+@app.route('/api/materials/<material_type>/<level>/<term>/<course_name>/<resource_type>', methods=['GET'])
+def get_materials_by_type(material_type, level, term, course_name, resource_type):
+    """Get approved resources by material type, level, term, course, and resource type"""
+    db = get_db()
+    
+    resources = db.execute(
+        'SELECT * FROM resources WHERE level = ? AND term = ? AND course_code = ? AND resource_type = ? AND status = "approved" ORDER BY uploaded_at DESC',
+        (level, term, course_name, resource_type)
+    ).fetchall()
+    db.close()
+    
+    data = []
+    for r in resources:
+        resource_dict = dict(r)
+        converted = {
+            'id': resource_dict['id'],
+            'fileTitle': resource_dict['file_title'],
+            'fileName': resource_dict['filename'],
+            'description': resource_dict['description'],
+            'uploadedBy': resource_dict['user_name'],
+            'batch': resource_dict['batch'],
+            'uploadedAt': resource_dict['uploaded_at'],
+            'file': {'filename': resource_dict['filename']} if resource_dict['filename'] else None
+        }
+        data.append(converted)
+    
+    return jsonify({'success': True, 'count': len(data), 'data': data})
+
 @app.route('/uploads/<filename>', methods=['GET'])
 def download_file(filename):
     return app.send_static_file(os.path.join(UPLOAD_FOLDER, filename))
