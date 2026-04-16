@@ -208,7 +208,7 @@
                 labs: ['EEE 182', 'CHEM 182', 'ME 182']
             },
             '1-2': {
-                courses: ['ETE 101', 'EES 183', 'MATH 183', 'PHY 185', 'CSE 181'],
+                courses: ['ETE 101', 'EEE 183', 'PHY 181', 'MATH 185', 'CSE 181'],
                 labs: ['ETE 102', 'EEE 184', 'PHY 182', 'CSE 182']
             },
             '2-1': {
@@ -225,15 +225,15 @@
             },
             '3-2': {
                 courses: ['ETE 311', 'ETE 313', 'ETE 315', 'ETE 317', 'ETE 319'],
-                labs: ['ETE 300', 'ETE 314', 'ETE 316', 'ETE 318', 'ETE 320']
+                labs: ['ETE 300', 'ETE 314', 'ETE 316', 'ETE 318', 'CSE 320']
             },
             '4-1': {
                 courses: ['ETE 401', 'ETE 403', 'ETE 405', 'ETE 407', 'ETE*'],
-                labs: ['ETE 400', 'ETE 480', 'ETE 402', 'ETE 404', 'ETE 406', 'ETE 408']
+                labs: ['ETE 400', 'ETE 402', 'ETE 404', 'ETE 406', 'ETE 408']
             },
             '4-2': {
                 courses: ['ETE 411', 'ETE 413', 'ETE 415', 'ETE 417', 'ETE*'],
-                labs: ['ETE 400', 'ETE 412', 'ETE 414', 'ETE 416', 'ETE***']
+                labs: ['ETE 400', 'ETE 412', 'ETE 414', 'ETE 416', 'ETE*']
             }
         };
 
