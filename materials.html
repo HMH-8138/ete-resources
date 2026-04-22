@@ -494,7 +494,11 @@
                     uploadBadge = '<span class="pdf-count">User Upload</span>';
                 }
                 
-                card.innerHTML = '<h4>' + item.name + '</h4><p>' + item.title + '</p>' + uploadBadge + viewLink;
+                // Use fileTitle and description from API, fallback to name and title for course lists
+                const title = item.fileTitle || item.name || 'Untitled';
+                const description = item.description || item.title || '';
+                
+                card.innerHTML = '<h4>' + title + '</h4><p>' + description + '</p>' + uploadBadge + viewLink;
                 grid.appendChild(card);
             });
 
