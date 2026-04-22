@@ -479,16 +479,14 @@
                 const card = document.createElement('div');
                 card.className = 'item-card';
                 
-                // Get filename - check both item.filename and item.file.filename
-                const filename = item.filename || (item.file && item.file.filename);
+                // Get filename - check both item.filename, item.fileName and item.file.filename
+                const filename = item.filename || item.fileName || (item.file && item.file.filename);
                 
                 let viewLink = '';
-                if (item.isUserUpload && filename) {
+                if (filename) {
                     viewLink = '<a href="https://HMH8138.pythonanywhere.com/uploads/' + filename + '" target="_blank" class="item-link">View PDF</a>';
-                } else if (item.isUserUpload) {
-                    viewLink = '<span class="item-link" style="color:#999;">No file</span>';
                 } else {
-                    viewLink = '<span class="item-link" style="color:#999;">Not available</span>';
+                    viewLink = '<span class="item-link" style="color:#999;">No file</span>';
                 }
                 
                 let uploadBadge = '';
