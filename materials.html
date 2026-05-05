@@ -355,47 +355,47 @@
         // Backend API URL
         const API_URL = 'https://hmh8138.pythonanywhere.com/api';
 
-        // Course and Lab data with fallback
+        // Course and Lab data with fallback - CORRECTED DATA
         const coursesDataByLevel = {
             '1-1': {
                 courses: [
-                    { name: 'EEE 181', title: 'Electric Circuit Theory' },
-                    { name: 'MATH 181', title: 'Calculus I' },
-                    { name: 'MATH 183', title: 'Linear Algebra' },
-                    { name: 'CHEM 181', title: 'Chemistry I' },
-                    { name: 'HUM 181', title: 'English I' }
+                    { name: 'EEE 181', title: 'Basic Electrical Engineering' },
+                    { name: 'MATH 181', title: 'Differential and Integral Calculus' },
+                    { name: 'MATH 183', title: 'Ordinary & Partial Differential Equations and Matrix' },
+                    { name: 'CHEM 181', title: 'Chemistry' },
+                    { name: 'HUM 181', title: 'Technical English' }
                 ],
                 labs: [
-                    { name: 'EEE 182', title: 'Circuit Theory Lab' },
-                    { name: 'CHEM 182', title: 'Chemistry Lab' },
-                    { name: 'ME 182', title: 'Mechanical Workshop' }
+                    { name: 'EEE 182', title: 'Basic Electrical Engineering Sessional' },
+                    { name: 'CHEM 182', title: 'Chemistry Sessional' },
+                    { name: 'ME 182', title: 'Mechanical Engineering Drawing' }
                 ]
             },
             '1-2': {
                 courses: [
-                    { name: 'ETE 101', title: 'Electronics I' },
-                    { name: 'EES 183', title: 'Fundamentals of Electrical Machines' },
-                    { name: 'MATH 183', title: 'Differential Equations' },
-                    { name: 'PHY 185', title: 'Engineering Physics' },
+                    { name: 'ETE 101', title: 'Electronics-I' },
+                    { name: 'EEE 183', title: 'Fundamentals of Electrical Machines' },
+                    { name: 'PHY 181', title: 'Engineering Physics' },
+                    { name: 'MATH 185', title: 'Vector Analysis and Operational Calculus' },
                     { name: 'CSE 181', title: 'Computer Programming and Numerical Analysis' }
                 ],
                 labs: [
                     { name: 'ETE 102', title: 'Electronics-I Sessional' },
                     { name: 'EEE 184', title: 'Fundamentals of Electrical Machines Sessional' },
-                    { name: 'PHY 182', title: 'Engineering Physics Session' },
-                    { name: 'CSE 182', title: 'Computer Programming Sessional' }
+                    { name: 'PHY 182', title: 'Engineering Physics Sessional' },
+                    { name: 'CSE 182', title: 'Computer Programming and Numerical Analysis Sessional' }
                 ]
             },
             '2-1': {
                 courses: [
-                    { name: 'ETE 201', title: 'Electronics II' },
+                    { name: 'ETE 201', title: 'Electronics-II' },
                     { name: 'ETE 203', title: 'Signals and Systems' },
                     { name: 'CSE 281', title: 'Data Structures and Algorithms' },
                     { name: 'MATH 281', title: 'Engineering Statistics and Complex Variables' },
                     { name: 'HUM 281', title: 'Financial Accounting and Management' }
                 ],
                 labs: [
-                    { name: 'ETE 202', title: 'Electronics-I Sessional' },
+                    { name: 'ETE 202', title: 'Electronics-II Sessional' },
                     { name: 'ETE 204', title: 'Signals and Systems Sessional' },
                     { name: 'CSE 282', title: 'Data Structures and Algorithms Sessional' }
                 ]
@@ -403,16 +403,16 @@
             '2-2': {
                 courses: [
                     { name: 'ETE 205', title: 'Digital Logic Design' },
-                    { name: 'ETE 207', title: 'Electromagnetic Fields & Waves' },
+                    { name: 'ETE 207', title: 'Electromagnetic Fields and Waves' },
                     { name: 'ETE 209', title: 'Analog Communications' },
                     { name: 'ETE 211', title: 'Control System Engineering' },
+                    { name: 'CSE 284', title: 'Object Oriented Programming' },
                     { name: 'HUM 283', title: 'Economics and Sociology' }
                 ],
                 labs: [
                     { name: 'ETE 206', title: 'Digital Logic Design Sessional' },
                     { name: 'ETE 210', title: 'Analog Communications Sessional' },
-                    { name: 'ETE 212', title: 'Control System Engineering Sessional' },
-                    { name: 'CSE 284', title: 'Object Oriented Programming' }
+                    { name: 'ETE 212', title: 'Control System Engineering Sessional' }
                 ]
             },
             '3-1': {
@@ -433,6 +433,7 @@
             },
             '3-2': {
                 courses: [
+                    { name: 'ETE 300', title: 'Electronic System Design and Project' },
                     { name: 'ETE 311', title: 'Information Theory and Coding' },
                     { name: 'ETE 313', title: 'Electronic Measurement and Instrumentation' },
                     { name: 'ETE 315', title: 'Computer Communications and Networks' },
@@ -440,7 +441,6 @@
                     { name: 'ETE 319', title: 'Microprocessor and Microcontroller' }
                 ],
                 labs: [
-                    { name: 'ETE 300', title: 'Electronic System Design and Project' },
                     { name: 'ETE 314', title: 'Electronic Measurement and Instrumentation Sessional' },
                     { name: 'ETE 316', title: 'Computer Communications and Networks Sessional' },
                     { name: 'ETE 318', title: 'Power System for Communication Engineering Sessional' },
@@ -449,35 +449,36 @@
             },
             '4-1': {
                 courses: [
+                    { name: 'ETE 400', title: 'Project and Thesis' },
+                    { name: 'ETE 480', title: 'Industrial Training (2 Weeks)' },
                     { name: 'ETE 401', title: 'Telecommunication Networks and Switching' },
                     { name: 'ETE 403', title: 'VLSI Technology' },
                     { name: 'ETE 405', title: 'Wireless and Mobile Communication' },
                     { name: 'ETE 407', title: 'Multimedia Communication' },
-                    { name: 'ETE*', title: 'Elective I' }
+                    { name: 'ETE *', title: 'Elective I' }
                 ],
                 labs: [
-                    { name: 'ETE 400', title: 'Project and Thesis' },
-                    { name: 'ETE 480', title: 'Industrial Training (2 Weeks)' },
                     { name: 'ETE 402', title: 'Telecommunication Networks and Switching Sessional' },
                     { name: 'ETE 404', title: 'VLSI Technology Sessional' },
                     { name: 'ETE 406', title: 'Wireless and Mobile Communication Sessional' },
-                    { name: 'ETE 408', title: 'Multimedia Communication Sessional' }
+                    { name: 'ETE 408', title: 'Multimedia Communication Sessional' },
+                    { name: 'ETE +++', title: 'Sessional based on ETE***' }
                 ]
             },
             '4-2': {
                 courses: [
+                    { name: 'ETE 400', title: 'Project and Thesis' },
                     { name: 'ETE 411', title: 'Optical Fiber Communications' },
                     { name: 'ETE 413', title: 'Satellite Communications and RADAR' },
                     { name: 'ETE 415', title: 'IoT and Industrial Automation' },
                     { name: 'ETE 417', title: 'Engineering Ethics and Entrepreneurship' },
-                    { name: 'ETE*', title: 'Elective-II' }
+                    { name: 'ETE ^^^', title: 'Elective II' }
                 ],
                 labs: [
-                    { name: 'ETE 400', title: 'Project and Thesis' },
                     { name: 'ETE 412', title: 'Optical Fiber Communications Sessional' },
                     { name: 'ETE 414', title: 'Satellite Communications and RADAR Sessional' },
                     { name: 'ETE 416', title: 'IoT and Industrial Automation Sessional' },
-                    { name: 'ETE***', title: 'Sessional Based on ETE***' }
+                    { name: 'ETE ***', title: 'Sessional Based on ETE^^^' }
                 ]
             }
         };
