@@ -75,7 +75,7 @@ body {
     display: flex;
     list-style: none;
     gap: 30px;
-    justify-content: flex-end;
+    margin-left: auto;
 }
 
 .nav-item {
