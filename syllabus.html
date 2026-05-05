@@ -281,7 +281,12 @@
 
     <nav class="navbar">
         <div class="nav-container">
-            <ul class="nav-menu">
+            <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
                 <li class="nav-item portal-nav"><a href="student_login.html" class="nav-link">Student Portal</a></li>
@@ -289,6 +294,7 @@
             </ul>
         </div>
     </nav>
+    <script src="common.js"></script>
 
     <header class="hero">
         <div class="overlay">
