@@ -121,6 +121,7 @@
                             <p style="text-align: center; color: #999; grid-column: 1/-1;">Select Level and Term first</p>
                         </div>
                         <input type="hidden" id="courseCode" value="">
+                        <input type="hidden" id="courseName" value="">
                     </div>
 
                     <div class="form-group">
@@ -210,36 +211,128 @@
         // Course data by Level and Term
         const coursesDataByLevel = {
             '1-1': {
-                courses: ['EEE 181', 'MATH 181', 'MATH 183', 'CHEM 181', 'HUM 181'],
-                labs: ['EEE 182', 'CHEM 182', 'ME 182']
+                courses: [
+                    { name: 'EEE 181', title: 'Basic Electrical Engineering' },
+                    { name: 'MATH 181', title: 'Differential and Integral Calculus' },
+                    { name: 'MATH 183', title: 'Ordinary & Partial Differential Equations and Matrix' },
+                    { name: 'CHEM 181', title: 'Chemistry' },
+                    { name: 'HUM 181', title: 'Technical English' }
+                ],
+                labs: [
+                    { name: 'EEE 182', title: 'Basic Electrical Engineering Sessional' },
+                    { name: 'CHEM 182', title: 'Chemistry Sessional' },
+                    { name: 'ME 182', title: 'Mechanical Engineering Drawing' }
+                ]
             },
             '1-2': {
-                courses: ['ETE 101', 'EES 183', 'MATH 183', 'PHY 185', 'CSE 181'],
-                labs: ['ETE 102', 'EEE 184', 'PHY 182', 'CSE 182']
+                courses: [
+                    { name: 'ETE 101', title: 'Electronics-I' },
+                    { name: 'EEE 183', title: 'Fundamentals of Electrical Machines' },
+                    { name: 'PHY 181', title: 'Engineering Physics' },
+                    { name: 'MATH 185', title: 'Vector Analysis and Operational Calculus' },
+                    { name: 'CSE 181', title: 'Computer Programming and Numerical Analysis' }
+                ],
+                labs: [
+                    { name: 'ETE 102', title: 'Electronics-I Sessional' },
+                    { name: 'EEE 184', title: 'Fundamentals of Electrical Machines Sessional' },
+                    { name: 'PHY 182', title: 'Engineering Physics Sessional' },
+                    { name: 'CSE 182', title: 'Computer Programming and Numerical Analysis Sessional' }
+                ]
             },
             '2-1': {
-                courses: ['ETE 201', 'ETE 203', 'CSE 281', 'MATH 281', 'HUM 281'],
-                labs: ['ETE 202', 'ETE 204', 'CSE 282']
+                courses: [
+                    { name: 'ETE 201', title: 'Electronics-II' },
+                    { name: 'ETE 203', title: 'Signals and Systems' },
+                    { name: 'CSE 281', title: 'Data Structures and Algorithms' },
+                    { name: 'MATH 281', title: 'Engineering Statistics and Complex Variables' },
+                    { name: 'HUM 281', title: 'Financial Accounting and Management' }
+                ],
+                labs: [
+                    { name: 'ETE 202', title: 'Electronics-II Sessional' },
+                    { name: 'ETE 204', title: 'Signals and Systems Sessional' },
+                    { name: 'CSE 282', title: 'Data Structures and Algorithms Sessional' }
+                ]
             },
             '2-2': {
-                courses: ['ETE 205', 'ETE 207', 'ETE 209', 'ETE 211', 'HUM 283'],
-                labs: ['ETE 206', 'ETE 210', 'ETE 212', 'CSE 284']
+                courses: [
+                    { name: 'ETE 205', title: 'Digital Logic Design' },
+                    { name: 'ETE 207', title: 'Electromagnetic Fields and Waves' },
+                    { name: 'ETE 209', title: 'Analog Communications' },
+                    { name: 'ETE 211', title: 'Control System Engineering' },
+                    { name: 'CSE 284', title: 'Object Oriented Programming' },
+                    { name: 'HUM 283', title: 'Economics and Sociology' }
+                ],
+                labs: [
+                    { name: 'ETE 206', title: 'Digital Logic Design Sessional' },
+                    { name: 'ETE 210', title: 'Analog Communications Sessional' },
+                    { name: 'ETE 212', title: 'Control System Engineering Sessional' }
+                ]
             },
             '3-1': {
-                courses: ['ETE 301', 'ETE 303', 'ETE 305', 'ETE 307', 'ETE 309'],
-                labs: ['ETE 304', 'ETE 306', 'ETE 308', 'ETE 310', 'CSE 380']
+                courses: [
+                    { name: 'ETE 301', title: 'Semiconductor Physics & Devices' },
+                    { name: 'ETE 303', title: 'Industrial Electronics' },
+                    { name: 'ETE 305', title: 'Digital Communication' },
+                    { name: 'ETE 307', title: 'Microwave and Antenna Engineering' },
+                    { name: 'ETE 309', title: 'Digital Signal Processing' }
+                ],
+                labs: [
+                    { name: 'ETE 304', title: 'Industrial Electronics Sessional' },
+                    { name: 'ETE 306', title: 'Digital Communication Sessional' },
+                    { name: 'ETE 308', title: 'Microwave and Antenna Engineering Sessional' },
+                    { name: 'ETE 310', title: 'Digital Signal Processing Sessional' },
+                    { name: 'CSE 380', title: 'Internet Programming' }
+                ]
             },
             '3-2': {
-                courses: ['ETE 311', 'ETE 313', 'ETE 315', 'ETE 317', 'ETE 319'],
-                labs: ['ETE 300', 'ETE 314', 'ETE 316', 'ETE 318', 'ETE 320']
+                courses: [
+                    { name: 'ETE 300', title: 'Electronic System Design and Project' },
+                    { name: 'ETE 311', title: 'Information Theory and Coding' },
+                    { name: 'ETE 313', title: 'Electronic Measurement and Instrumentation' },
+                    { name: 'ETE 315', title: 'Computer Communications and Networks' },
+                    { name: 'ETE 317', title: 'Power System for Communication Engineering' },
+                    { name: 'ETE 319', title: 'Microprocessor and Microcontroller' }
+                ],
+                labs: [
+                    { name: 'ETE 314', title: 'Electronic Measurement and Instrumentation Sessional' },
+                    { name: 'ETE 316', title: 'Computer Communications and Networks Sessional' },
+                    { name: 'ETE 318', title: 'Power System for Communication Engineering Sessional' },
+                    { name: 'ETE 320', title: 'Microprocessor and Microcontroller Sessional' }
+                ]
             },
             '4-1': {
-                courses: ['ETE 401', 'ETE 403', 'ETE 405', 'ETE 407', 'ETE*'],
-                labs: ['ETE 400', 'ETE 480', 'ETE 402', 'ETE 404', 'ETE 406', 'ETE 408']
+                courses: [
+                    { name: 'ETE 400', title: 'Project and Thesis' },
+                    { name: 'ETE 480', title: 'Industrial Training (2 Weeks)' },
+                    { name: 'ETE 401', title: 'Telecommunication Networks and Switching' },
+                    { name: 'ETE 403', title: 'VLSI Technology' },
+                    { name: 'ETE 405', title: 'Wireless and Mobile Communication' },
+                    { name: 'ETE 407', title: 'Multimedia Communication' },
+                    { name: 'ETE *', title: 'Elective I' }
+                ],
+                labs: [
+                    { name: 'ETE 402', title: 'Telecommunication Networks and Switching Sessional' },
+                    { name: 'ETE 404', title: 'VLSI Technology Sessional' },
+                    { name: 'ETE 406', title: 'Wireless and Mobile Communication Sessional' },
+                    { name: 'ETE 408', title: 'Multimedia Communication Sessional' },
+                    { name: 'ETE +++', title: 'Sessional based on ETE***' }
+                ]
             },
             '4-2': {
-                courses: ['ETE 411', 'ETE 413', 'ETE 415', 'ETE 417', 'ETE*'],
-                labs: ['ETE 400', 'ETE 412', 'ETE 414', 'ETE 416', 'ETE***']
+                courses: [
+                    { name: 'ETE 400', title: 'Project and Thesis' },
+                    { name: 'ETE 411', title: 'Optical Fiber Communications' },
+                    { name: 'ETE 413', title: 'Satellite Communications and RADAR' },
+                    { name: 'ETE 415', title: 'IoT and Industrial Automation' },
+                    { name: 'ETE 417', title: 'Engineering Ethics and Entrepreneurship' },
+                    { name: 'ETE ^^^', title: 'Elective II' }
+                ],
+                labs: [
+                    { name: 'ETE 412', title: 'Optical Fiber Communications Sessional' },
+                    { name: 'ETE 414', title: 'Satellite Communications and RADAR Sessional' },
+                    { name: 'ETE 416', title: 'IoT and Industrial Automation Sessional' },
+                    { name: 'ETE ***', title: 'Sessional Based on ETE^^^' }
+                ]
             }
         };
 
@@ -335,10 +428,12 @@
                     items.forEach(item => {
                         const label = document.createElement('label');
                         label.className = 'block-option';
+                        const courseCode = item.name || item;
+                        const courseTitle = item.title || '';
                         label.innerHTML = `
-                            <input type="checkbox" name="courseCode" value="${item}" onchange="updateCourseSelection('${item}')">
+                            <input type="checkbox" name="courseCode" value="${courseCode}" onchange="updateCourseSelection('${courseCode}', '${courseTitle}')">
                             <div class="block-icon">📖</div>
-                            <span class="block-label">${item}</span>
+                            <span class="block-label">${courseCode}</span>
                         `;
                         courseGrid.appendChild(label);
                     });
@@ -351,8 +446,9 @@
             }
         }
 
-        function updateCourseSelection(course) {
+        function updateCourseSelection(course, title) {
             document.getElementById('courseCode').value = course;
+            document.getElementById('courseName').value = title;
         }
 
         function handleFileSelect() {
@@ -400,7 +496,7 @@
             const resourceType = document.querySelector('input[name="resourceType"]:checked');
             const fileTitle = document.getElementById('fileTitle').value;
             const description = document.getElementById('fileDescription').value;
-            const courseName = courseCode;
+            const courseName = document.getElementById('courseName').value || courseCode;
 
             // Create FormData to send file and data
             const formData = new FormData();
