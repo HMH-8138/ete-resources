@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus & Curriculum - ETE Resource Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .syllabus-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 15px;
+        }
+
+        .upload-section {
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.1), rgba(0, 212, 255, 0.1));
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 2px dashed var(--primary-blue);
+        }
+
+        .upload-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 20px;
+            background: white;
+            border: 2px dashed var(--secondary-blue);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-wrapper input[type="file"]:hover + .file-upload-label {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
+
+        .file-upload-label .upload-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .file-upload-label p {
+            margin: 0;
+            color: var(--text-dark);
+        }
+
+        .file-name-display {
+            margin-top: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            display: none;
+            color: var(--secondary-blue);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--secondary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .syllabi-list {
+            margin-top: 40px;
+        }
+
+        .syllabi-list h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .syllabus-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .syllabus-info h4 {
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .syllabus-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 3px 0;
+        }
+
+        .syllabus-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .syllabus-actions a,
+        .syllabus-actions button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn {
+            background: var(--secondary-blue);
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-blue);
+        }
+
+        .delete-btn {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #ff5252;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-approved {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .syllabus-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .syllabus-actions {
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                <li class="nav-item portal-nav"><a href="student_login.html" class="nav-link">Student Portal</a></li>
+                <li class="nav-item portal-nav"><a href="admin_login.html" class="nav-link">Admin Portal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="overlay">
+            <p class="dept-sub">Faculty of Electrical & Computer Engineering</p>
+            <h1>Syllabus & Curriculum</h1>
+            <p class="tagline">Access course syllabi and curriculum documents</p>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html" style="text-decoration: none; color: inherit;">Back to Home</a></li>
+                <li><a href="routine.html" style="text-decoration: none; color: inherit;">View Class Routine</a></li>
+                <li><a href="about.html" style="text-decoration: none; color: inherit;">About Us</a></li>
+            </ul>
+        </aside>
+
+        <main class="container syllabus-container">
+            <h2 class="section-header">📚 Syllabus Repository</h2>
+
+            <div id="messageDiv" class="message"></div>
+
+            <!-- Official Syllabus Document -->
+            <div class="syllabus-item" style="margin-bottom: 30px; border-left-color: var(--accent-cyan);">
+                <div class="syllabus-info">
+                    <h4>📘 Official Department Syllabus</h4>
+                    <p><strong>ETE Program Syllabus (Optimized)</strong></p>
+                    <p style="font-size: 0.85rem;">Complete syllabus document for the Electronics and Telecommunication Engineering program</p>
+                    <span class="status-badge status-approved">official</span>
+                </div>
+                <div class="syllabus-actions">
+                    <a href="https://hmh8138.pythonanywhere.com/uploads/Syllabus%20optimized.pdf" download class="download-btn">📥 Download PDF</a>
+                </div>
+            </div>
+
+            <div id="messageDiv" class="message"></div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h3>📤 Upload Syllabus Document</h3>
+                
+                <form id="syllabusForm">
+                    <div class="form-group">
+                        <label for="levelSelect">Academic Level</label>
+                        <select id="levelSelect" required>
+                            <option value="">Select Level</option>
+                            <option value="1">Level 1</option>
+                            <option value="2">Level 2</option>
+                            <option value="3">Level 3</option>
+                            <option value="4">Level 4</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="termSelect">Term</label>
+                        <select id="termSelect" required>
+                            <option value="">Select Term</option>
+                            <option value="1">Term 1</option>
+                            <option value="2">Term 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="courseCode">Course Code</label>
+                        <input type="text" id="courseCode" placeholder="e.g., ETE 101" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="courseName">Course Name</label>
+                        <input type="text" id="courseName" placeholder="e.g., Digital Electronics" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="documentTitle">Document Title</label>
+                        <input type="text" id="documentTitle" placeholder="e.g., Course Syllabus 2026" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Brief description of the syllabus document..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload File (PDF, DOCX, or Images)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                            <label for="fileInput" class="file-upload-label">
+                                <div class="upload-icon">📁</div>
+                                <p>Click to upload or drag and drop</p>
+                                <p style="font-size: 0.85rem; color: #999;">PDF, DOCX, JPG, PNG (Max 10MB)</p>
+                            </label>
+                            <div id="fileNameDisplay" class="file-name-display"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">📤 Upload Syllabus</button>
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Syllabi List -->
+            <div class="syllabi-list" id="syllabiiListContainer" style="display: none;">
+                <h3>📑 Available Syllabi</h3>
+                <div id="syllabiiList"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Handle file upload display
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = '✓ File selected: ' + this.files[0].name;
+                fileNameDisplay.style.display = 'block';
+            } else {
+                fileNameDisplay.style.display = 'none';
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('syllabusForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('level', document.getElementById('levelSelect').value);
+            formData.append('term', document.getElementById('termSelect').value);
+            formData.append('courseCode', document.getElementById('courseCode').value);
+            formData.append('courseName', document.getElementById('courseName').value);
+            formData.append('fileTitle', document.getElementById('documentTitle').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('file', document.getElementById('fileInput').files[0]);
+            formData.append('resourceType', 'syllabus');
+            formData.append('userId', localStorage.getItem('userId') || 'guest');
+            formData.append('userName', localStorage.getItem('userName') || 'Guest User');
+            formData.append('batch', localStorage.getItem('batch') || '');
+
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showMessage('✓ Syllabus uploaded successfully! Thank you for sharing.', 'success');
+                    document.getElementById('syllabusForm').reset();
+                    fileNameDisplay.style.display = 'none';
+                    loadSyllabi();
+                } else {
+                    showMessage('✗ Upload failed: ' + data.message, 'error');
+                }
+            } catch (error) {
+                showMessage('✗ Error uploading file: ' + error.message, 'error');
+            }
+        });
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('messageDiv');
+            messageDiv.textContent = message;
+            messageDiv.className = 'message ' + type;
+            setTimeout(() => {
+                messageDiv.className = 'message';
+            }, 5000);
+        }
+
+        // Load syllabi from server
+        async function loadSyllabi() {
+            try {
+                const response = await fetch('/api/resources/type/syllabus');
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.length > 0) {
+                    const container = document.getElementById('syllabiiListContainer');
+                    const list = document.getElementById('syllabiiList');
+                    
+                    list.innerHTML = '';
+                    
+                    data.data.forEach(item => {
+                        const statusClass = 'status-' + (item.status || 'pending');
+                        const itemHTML = `
+                            <div class="syllabus-item">
+                                <div class="syllabus-info">
+                                    <h4>${item.courseName} (${item.courseCode})</h4>
+                                    <p><strong>Level ${item.level} - Term ${item.term}</strong></p>
+                                    <p>📄 ${item.fileTitle}</p>
+                                    <p style="font-size: 0.85rem;">${item.description || 'No description provided'}</p>
+                                    <span class="status-badge ${statusClass}">${item.status || 'pending'}</span>
+                                </div>
+                                <div class="syllabus-actions">
+                                    ${item.file && item.file.filename ? `
+                                        <a href="/uploads/${item.file.filename}" download class="download-btn">📥 Download</a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        `;
+                        list.innerHTML += itemHTML;
+                    });
+
+                    container.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading syllabi:', error);
+            }
+        }
+
+        // Load syllabi on page load
+        window.addEventListener('load', loadSyllabi);
+    </script>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import sqlite3
 import json
@@ -58,6 +58,13 @@ def init_db():
             review_comment TEXT,
             admin_id TEXT
         );
+        CREATE INDEX IF NOT EXISTS idx_users_user_id ON users(user_id);
+        CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+        CREATE INDEX IF NOT EXISTS idx_resources_user_id ON resources(user_id);
+        CREATE INDEX IF NOT EXISTS idx_resources_status ON resources(status);
+        CREATE INDEX IF NOT EXISTS idx_resources_level_term ON resources(level, term);
+        CREATE INDEX IF NOT EXISTS idx_resources_level_term_course ON resources(level, term, course_code);
+        CREATE INDEX IF NOT EXISTS idx_resources_uploaded_at ON resources(uploaded_at DESC);
     ''')
     db.commit()
     db.close()
@@ -396,9 +403,47 @@ def get_materials_by_type(material_type, level, term, course_name, resource_type
     
     return jsonify({'success': True, 'count': len(data), 'data': data})
 
+@app.route('/api/resources/type/<resource_type>', methods=['GET'])
+def get_resources_by_type(resource_type):
+    """Get all approved resources by type"""
+    db = get_db()
+    
+    resources = db.execute(
+        'SELECT * FROM resources WHERE resource_type = ? AND status = "approved" ORDER BY level DESC, term DESC, uploaded_at DESC',
+        (resource_type,)
+    ).fetchall()
+    db.close()
+    
+    data = []
+    for r in resources:
+        resource_dict = dict(r)
+        converted = {
+            'id': resource_dict['id'],
+            'userId': resource_dict['user_id'],
+            'userName': resource_dict['user_name'],
+            'batch': resource_dict['batch'],
+            'level': resource_dict['level'],
+            'term': resource_dict['term'],
+            'courseCode': resource_dict['course_code'],
+            'courseName': resource_dict['course_name'],
+            'resourceType': resource_dict['resource_type'],
+            'fileTitle': resource_dict['file_title'],
+            'description': resource_dict['description'],
+            'file': {'filename': resource_dict['filename']} if resource_dict['filename'] else None,
+            'status': resource_dict['status'],
+            'uploadedAt': resource_dict['uploaded_at'],
+            'reviewedAt': resource_dict['reviewed_at'],
+            'reviewComment': resource_dict['review_comment'],
+            'adminId': resource_dict['admin_id']
+        }
+        data.append(converted)
+    
+    return jsonify({'success': True, 'count': len(data), 'data': data})
+
 @app.route('/uploads/<filename>', methods=['GET'])
 def download_file(filename):
-    return app.send_static_file(os.path.join(UPLOAD_FOLDER, filename))
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
 
 if __name__ == '__main__':
     app.run(debug=False)

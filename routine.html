@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Routine - ETE Resource Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .routine-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 15px;
+        }
+
+        .routine-info {
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.1), rgba(0, 212, 255, 0.1));
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .routine-info p {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .routine-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .routine-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--primary-blue);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .routine-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .routine-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .routine-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .routine-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .routine-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--secondary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .routine-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .routine-link.external::after {
+            content: ' ↗';
+        }
+
+        .current-routine {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .current-routine h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 15px;
+        }
+
+        .routine-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            color: #999;
+        }
+
+        .routine-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .level-routine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .level-routine-card {
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.05), rgba(0, 212, 255, 0.05));
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-blue);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .level-routine-card:hover {
+            border-color: var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(5, 74, 142, 0.1), rgba(0, 212, 255, 0.1));
+            transform: translateY(-3px);
+        }
+
+        .level-routine-card h4 {
+            color: var(--primary-blue);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .level-routine-card p {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 5px 0 0 0;
+        }
+
+        .faq-section {
+            margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .faq-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--secondary-blue);
+            padding-left: 15px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-toggle {
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .routine-links {
+                grid-template-columns: 1fr;
+            }
+
+            .level-routine-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                <li class="nav-item portal-nav"><a href="student_login.html" class="nav-link">Student Portal</a></li>
+                <li class="nav-item portal-nav"><a href="admin_login.html" class="nav-link">Admin Portal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="overlay">
+            <p class="dept-sub">Faculty of Electrical & Computer Engineering</p>
+            <h1>Class Routine</h1>
+            <p class="tagline">Access your academic schedule and class timings</p>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html" style="text-decoration: none; color: inherit;">Back to Home</a></li>
+                <li><a href="syllabus.html" style="text-decoration: none; color: inherit;">View Syllabus</a></li>
+                <li><a href="about.html" style="text-decoration: none; color: inherit;">About Us</a></li>
+            </ul>
+        </aside>
+
+        <main class="container routine-container">
+            <h2 class="section-header">⏰ Class Routine & Schedule</h2>
+
+            <!-- Info Section -->
+            <div class="routine-info">
+                <p>📌 <strong>Welcome to the Class Routine Section!</strong></p>
+                <p>Here you can access the complete class schedule for all academic levels. The routine is maintained in an external portal for real-time updates and better accessibility. Click on the buttons below to view or download the schedule for your level.</p>
+            </div>
+
+            <!-- External Routine Links -->
+            <div class="routine-links">
+                <div class="routine-card">
+                    <div class="icon">📋</div>
+                    <h3>Level 1 Routine</h3>
+                    <p>View the schedule for Level 1 students</p>
+                    <a href="https://docs.google.com/spreadsheets/d/135h85D6M4c2eGfjmR5QS9aDk4C9sKAej/view" target="_blank" class="routine-link external">View Schedule</a>
+                </div>
+
+                <div class="routine-card">
+                    <div class="icon">📋</div>
+                    <h3>Level 2 Routine</h3>
+                    <p>View the schedule for Level 2 students</p>
+                    <a href="https://docs.google.com/spreadsheets/d/135h85D6M4c2eGfjmR5QS9aDk4C9sKAej/view" target="_blank" class="routine-link external">View Schedule</a>
+                </div>
+
+                <div class="routine-card">
+                    <div class="icon">📋</div>
+                    <h3>Level 3 Routine</h3>
+                    <p>View the schedule for Level 3 students</p>
+                    <a href="https://docs.google.com/spreadsheets/d/135h85D6M4c2eGfjmR5QS9aDk4C9sKAej/view" target="_blank" class="routine-link external">View Schedule</a>
+                </div>
+
+                <div class="routine-card">
+                    <div class="icon">📋</div>
+                    <h3>Level 4 Routine</h3>
+                    <p>View the schedule for Level 4 students</p>
+                    <a href="https://docs.google.com/spreadsheets/d/135h85D6M4c2eGfjmR5QS9aDk4C9sKAej/view" target="_blank" class="routine-link external">View Schedule</a>
+                </div>
+            </div>
+
+            <!-- Current Routine Section -->
+            <div class="current-routine">
+                <h3>📅 General Information</h3>
+                <p><strong>Class Timings:</strong></p>
+                <ul>
+                    <li>1st Class: 8:30 AM - 9:20 AM</li>
+                    <li>2nd Class: 9:20 AM - 10:10 AM</li>
+                    <li>3rd Class: 10:10 AM - 11:00 AM</li>
+                    <li>Break: 11:00 AM - 11:15 AM</li>
+                    <li>4th Class: 11:15 AM - 12:05 PM</li>
+                    <li>5th Class: 12:05 PM - 12:55 PM</li>
+                    <li>6th Class: 12:55 PM - 1:45 PM</li>
+                </ul>
+                <p style="margin-top: 20px;"><strong>Note:</strong> Lab sessions may have different timings. Please check the detailed routine for your level.</p>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3>❓ Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-toggle">+</span>
+                        <span>How often is the routine updated?</span>
+                    </div>
+                    <div class="faq-answer">
+                        The class routine is updated every semester and can be modified during the semester if necessary. Students are notified through email/SMS about any changes to the routine.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-toggle">+</span>
+                        <span>What should I do if there's a conflict in my schedule?</span>
+                    </div>
+                    <div class="faq-answer">
+                        If you notice any scheduling conflicts, please contact the Academic Affairs Office immediately. They will help resolve the issue or provide alternative arrangements.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-toggle">+</span>
+                        <span>Can I download the routine as a PDF?</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You can download the routine from the external link provided above. The routine is usually available in PDF and image formats for easy access and printing.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-toggle">+</span>
+                        <span>Where can I find lab session timings?</span>
+                    </div>
+                    <div class="faq-answer">
+                        Lab session timings are included in the detailed routine for each level. Lab sessions typically occur on different days and may have extended durations compared to regular classes.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="faq-toggle">+</span>
+                        <span>What if the routine link is not working?</span>
+                    </div>
+                    <div class="faq-answer">
+                        If the routine link is not accessible, please contact the IT support or Academic Affairs Office. You can also check with your department for an alternative access method.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
