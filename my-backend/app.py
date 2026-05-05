@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import sqlite3
 import json
@@ -399,7 +399,10 @@ def get_materials_by_type(material_type, level, term, course_name, resource_type
 
 @app.route('/uploads/<filename>', methods=['GET'])
 def download_file(filename):
-    return app.send_static_file(os.path.join(UPLOAD_FOLDER, filename))
+    try:
+        return send_from_directory(os.path.abspath(UPLOAD_FOLDER), filename)
+    except FileNotFoundError:
+        return jsonify({'error': 'File not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=False)
